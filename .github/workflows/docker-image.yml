@@ -1,0 +1,21 @@
+name: Docker Image build and push 
+
+on:
+  push:
+   branches: [ main ]
+  pull_request:
+    branches: [ main ]
+      
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build & Push Image
+      run: |
+        
+        docker build -t ${{ secrets.DOCKERUSERNAME }}/frontend:${{ github.run_attempt }} .
+        echo "${{ secrets.DOCKERPASSWORD }}" | docker login -u "${{ secrets.DOCKERUSERNAME }}" --password-stdin
+        docker push d${{ secrets.DOCKERUSERNAME }}/frontend:${{ github.run_attempt }} .
