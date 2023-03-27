@@ -20,4 +20,4 @@ jobs:
         
         docker build -t ${{ secrets.DOCKERUSERNAME }}/frontend:${{ github.run_attempt }} .
         echo "${{ secrets.DOCKERPASSWORD }}" | docker login -u "${{ secrets.DOCKERUSERNAME }}" --password-stdin
-        docker push ${{ secrets.DOCKERUSERNAME }}/github-action-frontend:${{ github.run_attempt }}
+        docker push "${{ secrets.DOCKERUSERNAME }}/github-action-frontend:${{ github.run_attempt }}"
